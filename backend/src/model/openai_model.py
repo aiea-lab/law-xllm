@@ -4,15 +4,18 @@ import dotenv
 from flask import jsonify
 from openai import OpenAI, OpenAIError
 
+import src.control.rag_functions as rag
+
 dotenv.load_dotenv()
 API_KEY = os.environ.get("OPEN_AI_API_KEY")
 client = OpenAI(api_key=API_KEY)
 
 
 def handle_openai_request(data):
+    print(data["messages"][0]["content"])
+    
     try:
         model, messages = get_model_and_messages(data)
-        print(messages)
         response_message = call_openai_api(model, messages)
         return jsonify({"choices": [{"message": {"content": response_message}}]})
     except OpenAIError as e:
@@ -24,7 +27,7 @@ def handle_openai_request(data):
 def get_model_and_messages(data):
     """Extract model and messages from the request data, with default values."""
     model = data.get("model", "gpt-3.5-turbo")
-    print(data)
+    print(data["messages"][0]["content"])
     messages = data.get("messages", get_default_messages())
     return model, messages
 
@@ -53,3 +56,7 @@ def call_openai_api(model, messages):
     except Exception as e:
         print("General error:", str(e))
         raise
+
+def get_rag(prompt):
+    result = rag.query(prompt)
+    return result
