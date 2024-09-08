@@ -12,6 +12,7 @@ client = OpenAI(api_key=API_KEY)
 def handle_openai_request(data):
     try:
         model, messages = get_model_and_messages(data)
+        print(messages)
         response_message = call_openai_api(model, messages)
         return jsonify({"choices": [{"message": {"content": response_message}}]})
     except OpenAIError as e:
@@ -23,6 +24,7 @@ def handle_openai_request(data):
 def get_model_and_messages(data):
     """Extract model and messages from the request data, with default values."""
     model = data.get("model", "gpt-3.5-turbo")
+    print(data)
     messages = data.get("messages", get_default_messages())
     return model, messages
 
@@ -32,12 +34,8 @@ def get_default_messages():
     return [
         {
             "role": "system",
-            "content": "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair.",
-        },
-        {
-            "role": "user",
-            "content": "Compose a poem that explains the concept of recursion in programming.",
-        },
+            "content": "",
+        }
     ]
 
 

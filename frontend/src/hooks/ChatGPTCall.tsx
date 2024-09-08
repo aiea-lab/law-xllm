@@ -13,11 +13,6 @@ async function ChatGPTCall(text: string): Promise<Result> {
       body: JSON.stringify({
         model: MODEL_NAME,
         messages: [
-          {
-            role: 'system',
-            content:
-              'You are a poetic assistant, skilled in explaining complex programming concepts with creative flair.',
-          },
           { role: 'user', content: text },
         ],
       }),
