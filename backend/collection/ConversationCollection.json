@@ -1,0 +1,48 @@
+{
+  "info": {
+    "_postman_id": "e5e2a510-8943-4b4f-b43b-6c75541d7e17",
+    "name": "Flask Conversations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Add Conversation",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"name\": \"Sample Conversation\",\n\t\"messages\": [\n\t\t{\"text\": \"Hello!\"},\n\t\t{\"text\": \"Hi, how can I help you today?\"}\n\t]\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:5000/conversation",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "5000",
+          "path": ["conversation"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Conversations",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:5000/conversation/all",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "5000",
+          "path": ["conversation", "all"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
