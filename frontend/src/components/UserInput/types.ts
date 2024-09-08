@@ -18,3 +18,8 @@ export type Message = {
 export type ChatMessageBoxProps = {
   messages: Message[];
 };
+
+export type ModalInput = {
+  open: boolean;
+  handleClose: () => void;
+};

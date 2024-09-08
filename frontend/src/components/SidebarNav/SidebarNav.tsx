@@ -1,7 +1,7 @@
 import { Box, Button, Divider, List, ListItem, ListItemButton, Typography } from '@mui/material';
 import { Sidebar } from 'lucide-react';
 import { useState, useEffect, useContext } from 'react';
-import { FaMoon, FaUser, FaQuestionCircle } from 'react-icons/fa';
+import { FaSun, FaMoon, FaUser, FaQuestionCircle } from 'react-icons/fa';
 
 import CustomSignInButton from '@/components/CustomSignInButton';
 import GoogleLoginComponent from '@/components/GoogleAuth/GoogleLoginComponent';
@@ -11,10 +11,14 @@ import { AppContext } from '@/pages/AppContext';
 const SidebarNav = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [conversations, setConversations] = useState<JSX.Element[]>([]);
-  const { setCurrConversation } = useContext(AppContext);
+  const { setCurrConversation, isDark, setIsDark } = useContext(AppContext);
 
   const toggleSidebar = () => {
     setIsOpen((prevState) => !prevState);
+  };
+
+  const toggleBrightness = () => {
+    setIsDark((prevMode) => !prevMode);
   };
 
   useEffect(() => {
@@ -25,6 +29,7 @@ const SidebarNav = () => {
     const fetchData = () => {
       const arr = data.map((conversation) => (
         <ListItem
+          disablePadding
           key={conversation.title}
           sx={{
             marginBottom: '0.5rem',
@@ -51,7 +56,7 @@ const SidebarNav = () => {
         display: 'flex',
         width: isOpen ? '16rem' : '4rem',
         height: '100%',
-        backgroundColor: '#202123',
+        backgroundColor: isDark ? '#202123' : '#BC9F8B',
         color: 'white',
         transition: 'width 0.3s',
       }}
@@ -62,7 +67,7 @@ const SidebarNav = () => {
           display: isOpen ? 'block' : 'none',
           width: '16rem',
           height: '100%',
-          backgroundColor: '#202123',
+          backgroundColor: isDark ? '#202123' : '#BC9F8B',
           color: 'white',
           padding: '1rem',
           flexDirection: 'column',
@@ -73,7 +78,7 @@ const SidebarNav = () => {
             <Button
               sx={{
                 width: '100%',
-                backgroundColor: '#202123',
+                backgroundColor: isDark ? '#202123' : '#BC9F8B',
                 border: '1px solid',
                 borderColor: 'gray.700',
                 color: 'white',
@@ -101,7 +106,7 @@ const SidebarNav = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                color: 'gray.400',
+                color: 'white',
               }}
             >
               <Sidebar size={24} />
@@ -116,6 +121,7 @@ const SidebarNav = () => {
           <Divider sx={{ borderColor: 'gray.700', marginBottom: '1rem' }} />
           <List>
             <ListItem
+              disablePadding
               sx={{
                 marginBottom: '0.5rem',
                 color: 'gray.300',
@@ -124,7 +130,17 @@ const SidebarNav = () => {
                 alignItems: 'center',
               }}
             >
-              <FaMoon style={{ marginRight: '0.5rem' }} /> Dark mode
+              <ListItemButton onClick={toggleBrightness}>
+                {isDark ? (
+                  <>
+                    <FaSun style={{ marginRight: '0.5rem' }} /> Light mode
+                  </>
+                ) : (
+                  <>
+                    <FaMoon style={{ marginRight: '0.5rem' }} /> Dark mode
+                  </>
+                )}
+              </ListItemButton>
             </ListItem>
             <ListItem
               sx={{

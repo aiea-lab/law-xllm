@@ -16,7 +16,7 @@ const ChatMessageBox = ({ messages }: ChatMessageBoxProps) => {
       {messages.map((message, index) => (
         <Box
           className={`p-2 rounded-md ${
-            message.type === 'user' ? 'bg-blue-200 self-end' : 'bg-gray-200 self-start'
+            message.type === 'user' ? 'bg-blue-200 self-end' : 'bg-gray-300 self-start'
           }`}
           key={index}
         >

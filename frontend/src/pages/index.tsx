@@ -14,11 +14,7 @@ export default function Home() {
     <main className="flex min-h-screen h-screen overflow-hidden">
       <AppProvider>
         <SidebarNav />
-        <div className="flex-grow p-4 bg-[#585C72] flex flex-col">
-          <div className="flex-grow overflow-auto">
-            <UserInput />
-          </div>
-        </div>
+        <UserInput />
       </AppProvider>
     </main>
   );
