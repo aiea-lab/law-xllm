@@ -7,6 +7,10 @@ from llama_index.core import Document, StorageContext, VectorStoreIndex
 from llama_index.vector_stores.chroma import ChromaVectorStore
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.core.prompts import PromptTemplate
+from llama_index.vector_stores.pinecone import PineconeVectorStore
+from llama_index.embeddings.openai import OpenAIEmbedding
+from llama_index.core.vector_stores import VectorStoreQuery
+
 
 from llama_index.llms.openai import OpenAI
 from dotenv import load_dotenv
@@ -37,7 +41,19 @@ def get_retriever(k = 3):
     
     return retriever
 
-def query(retriever, query_text: str):
+def query(query_str: str):
+
+    embed_model = OpenAIEmbedding()
+    vector_store = PineconeVectorStore(pinecone_index="law-index")
+    query_embedding = embed_model.get_query_embedding(query_str)
+
+    query_mode = "default"
+
+    vector_store_query = VectorStoreQuery(query_embedding=query_embedding, similarity_top_k=2, mode=query_mode)
+    query_result = vector_store.query(vector_store_query)
+
+    print(query_result)
+
     return "Cooked"
     # retrieved_content = retriever.retrieve(query_text)
 
