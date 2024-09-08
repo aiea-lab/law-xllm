@@ -1,0 +1,5 @@
+scrapy
+llama-index-vector-stores-pinecone
+llama-index
+pinecone-client
+
