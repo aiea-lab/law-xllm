@@ -5,3 +5,13 @@ Explainable LLM
 ## https://selfhelp.courts.ca.gov/families-and-children 
 ## https://selfhelp.courts.ca.gov/child-support-index
 ## https://www.kaggle.com/datasets/ananyapam7/legalai
+
+# Topics
+## How to get child support?
+## How to get guardianship?
+- Restraining orders
+- Parantage
+- Divorce
+## What are the benifits of marridge?
+
+# How to deal with halusinations and explaiability?
