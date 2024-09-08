@@ -15,7 +15,7 @@ Explainable LLM
 ## https://provinziano.com/domestic-partnership-vs-marriage-in-california/domestic-partnership-vs-marriage-in-california/#:~:text=Marriage%20in%20California%20grants%20legal,returns%2C%20and%20receive%20tax%20benefits.
 ## https://childsupportservices.saccounty.gov/Services/Pages/ChildSupportAmount.aspx
 ## https://data.bls.gov/cew/apps/data_views/data_views.htm#tab=Tables
-## 
+## https://childsupport.ca.gov/wp-content/uploads/sites/252/Misc./2021-4-12_GuidelineCalculator.pdf
 
 # Topics
 ## How to get child support?
