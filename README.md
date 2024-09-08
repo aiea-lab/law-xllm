@@ -13,6 +13,9 @@ Explainable LLM
 ## https://casetext.com/statute/california-codes/california-family-code
 ## https://cityhall.wedding/9-legal-benefits-of-marriage-in-california/
 ## https://provinziano.com/domestic-partnership-vs-marriage-in-california/domestic-partnership-vs-marriage-in-california/#:~:text=Marriage%20in%20California%20grants%20legal,returns%2C%20and%20receive%20tax%20benefits.
+## https://childsupportservices.saccounty.gov/Services/Pages/ChildSupportAmount.aspx
+## https://data.bls.gov/cew/apps/data_views/data_views.htm#tab=Tables
+## 
 
 # Topics
 ## How to get child support?
