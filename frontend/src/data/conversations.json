@@ -1,0 +1,7 @@
+[
+  {"title":"What time does the gym open?","content":[{"type":"user","text":"Do you know the opening time for the gym?"},{"type":"bot","text":"Yes, the gym opens between 9am and 5pm every day."}]},
+  {"title":"What dining halls are serving mashed potatoes?","content":[{"type":"user","text":"Do you know which dining hall serves mashed potatoes?"},{"type":"bot","text":"All dining halls are serving mashed potatoes."}]},
+  {"title":"What’s the bus schedule for route 36B?","content":[{"type":"user","text":"I wonder what’s the bus schedule for route 36B?"},{"type":"bot","text":"Sorry, I'm unfamiliar with that question."}]},
+  {"title":"Where can I find vegan options today?","content":[{"type":"user","text":"Are there any vegan meal options available today?"},{"type":"bot","text":"Yes, vegan options are available at the main cafeteria and the new grill."}]},
+  {"title":"What time does the library close?","content":[{"type":"user","text":"Can you tell me when the library closes?"},{"type":"bot","text":"The library closes at 9 PM on weekdays and at 6 PM on weekends."}]}
+]

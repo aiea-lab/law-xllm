@@ -1,0 +1,28 @@
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--background);
+}
+
+.message-box {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  background-color: var(--background);
+}
+
+.input-container {
+  display: flex;
+  padding: 16px;
+  border-top: 1px solid var(--border);
+  background-color: var(--background);
+  /* add two  */
+  position: sticky;
+  bottom: 0;
+}
+
+.input-container input {
+  flex-grow: 1;
+  background-color: white;
+}
