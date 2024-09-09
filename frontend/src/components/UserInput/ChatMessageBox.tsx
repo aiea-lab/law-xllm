@@ -11,6 +11,8 @@ const ChatMessageBox = ({ messages }: ChatMessageBoxProps) => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  console.log(messages)
+
   return (
     <Box className="flex flex-col space-y-4 p-4 overflow-auto h-full">
       {messages.map((message, index) => (

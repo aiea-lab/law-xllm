@@ -33,7 +33,7 @@ export const useChatHandler = () => {
       const result: Result = await ChatGPTCall(textInput);
       const botMessage: Message =
         result.type === 'success'
-          ? { type: 'user', text: result.data }
+          ? { type: 'bot', text: result.data }
           : { type: 'bot', text: 'An error occurred while fetching the response.' };
 
       setMessages((prevMessages) => [...prevMessages, botMessage]);

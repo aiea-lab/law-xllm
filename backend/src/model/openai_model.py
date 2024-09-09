@@ -14,7 +14,9 @@ def handle_openai_request(data):
     try:
         query = data["messages"][0]["content"]
         ans = rag.query(query)
-        return jsonify({"choices": [{"message": {"content": ans}}]})
+        result = jsonify({"choices": [{"message": {"content": ans}}]})
+        print({"choices": [{"message": {"content": ans}}]})
+        return result
     except OpenAIError as e:
         return jsonify({"error": f"OpenAIError: {e}"}), 500
     except Exception as e:
