@@ -1,16 +1,22 @@
 import requests
 import os
-from llama_index.core.node_parser import SemanticSplitterNodeParser
+from llama_index.core.node_parser import SentenceSplitter
 from llama_index.embeddings.openai import OpenAIEmbedding
 from pinecone import Pinecone, ServerlessSpec
 from dotenv import load_dotenv
-from llama_index.core import Document
+from llama_index.core.schema import TextNode
+from llama_index.vector_stores.pinecone import PineconeVectorStore
+
+
 
 load_dotenv()
 
 embed_model = OpenAIEmbedding()
-splitter = SemanticSplitterNodeParser(
-    buffer_size=1, breakpoint_percentile_threshold=95, embed_model=embed_model
+text_parser = SentenceSplitter(
+    chunk_size=500,
+    chunk_overlap=50,
+    # separator=" ",
+
 )
 
 
@@ -19,7 +25,7 @@ def initialize_pinecone():
     
     PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
     pc = Pinecone(api_key=PINECONE_API_KEY)
-    index_name = "law-index"
+    index_name = "law-index-1"
     existing_indexes = [index_info["name"] for index_info in pc.list_indexes()]
     if index_name not in existing_indexes:
         print("Creating index")
@@ -30,6 +36,7 @@ def initialize_pinecone():
             spec = ServerlessSpec(cloud="aws", region="us-west-2"),
         )
     index = pc.Index(index_name)
+    # index.delete(deleteAll=True)
     return index
 
 
@@ -39,34 +46,43 @@ def scrape_site(url: str) -> str:
   return response.text
 
 
-def add_to_index(url, text):
+def add_to_index(idx, url, text):
     
-    vectors = []
-    document = Document(text=text, id_=url)  # Assuming `text` is the content and `url` is the identifier
-    nodes = splitter.get_nodes_from_documents([document])
+    text_chunks, doc_idxs = [], []
+    chunk = text_parser.split_text(text)
+    text_chunks.extend(chunk)
+
+    doc_idxs.extend([idx] * len(chunk))
+
+    nodes = []
+    for idx, text_chunk in enumerate(text_chunks):
+        node = TextNode(
+            text=text_chunk,
+        )
+        # src_doc_idx = doc_idxs[idx]
+        # src_page = url
+        nodes.append(node)
+
+    embed_model = OpenAIEmbedding()
     for node in nodes:
-        vector_id = node.id_
-        text = node.text
-        vector = embed_model.get_text_embedding(text)
-        vectors.append((vector_id, vector))
+        node_embedding = embed_model.get_text_embedding(
+            node.get_content(metadata_mode="all")
+        )
+        node.embedding = node_embedding
 
-    index.upsert(vectors)
+    vector_store.add(nodes)
 
 
-        
-        
-
-        
-        
+   
 
 
   
 def files_to_vectorstore(file_dir):
     with open(file_dir) as files:
 
-        for file in files:
+        for i, file in enumerate(files):
             text = scrape_site(file)
-            add_to_index(url = file, text = text)
+            add_to_index(idx = i, url = file, text = text)
 
             
 
@@ -78,6 +94,7 @@ def files_to_vectorstore(file_dir):
 if __name__ == '__main__':
     embed_model = OpenAIEmbedding()
     index = initialize_pinecone()
+    vector_store = PineconeVectorStore(index)
 
     files_to_vectorstore('law_scraper/filtered_links.txt')
 
