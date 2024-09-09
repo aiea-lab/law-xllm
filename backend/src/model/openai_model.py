@@ -3,7 +3,6 @@ import os
 import dotenv
 from flask import jsonify
 from openai import OpenAI, OpenAIError
-
 import src.control.rag_functions as rag
 
 dotenv.load_dotenv()
@@ -12,15 +11,14 @@ client = OpenAI(api_key=API_KEY)
 
 
 def handle_openai_request(data):
-    print(data["messages"][0]["content"])
-    
     try:
-        model, messages = get_model_and_messages(data)
-        response_message = call_openai_api(model, messages)
-        return jsonify({"choices": [{"message": {"content": response_message}}]})
+        query = data["messages"][0]["content"]
+        ans = rag.query(query)
+        return jsonify({"choices": [{"message": {"content": ans}}]})
     except OpenAIError as e:
         return jsonify({"error": f"OpenAIError: {e}"}), 500
     except Exception as e:
+        print(e)
         return jsonify({"error": str(e)}), 500
 
 
